@@ -11,22 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
-
-    public CustomerController() {
-    }
-
-    public CustomerService getCustomerService() {
-        return customerService;
-    }
-
-    public void setCustomerService(CustomerService customerService) {
-        this.customerService = customerService;
-    }
 
     @RequestMapping("/customers")
     public String listCustomers(Model model) {
@@ -61,27 +50,10 @@ public class CustomerController {
         return "display_customer";
     }
 
-    /**** FUTURE USE
     @RequestMapping("/customers/delete/{id}")
     public String deleteById(@PathVariable("id") Integer id, Model model) {
         customerService.delete( id );
         return "delete";
     }
 
-    @RequestMapping("/customers/update/{id}")
-    public String updateById(@PathVariable("id") Integer id, @RequestParam(value = "firstName") String firstName,
-                             @RequestParam(value = "lastName") String lastName,
-                             @RequestParam(value = "email") String email,
-                             @RequestParam(value = "phone") String phone) {
-
-        Customer updateCustomer = new Customer();
-        updateCustomer.setFirstName( firstName );
-        updateCustomer.setLastName( lastName );
-        updateCustomer.setEmail( email );
-        updateCustomer.setPhone( phone );
-
-        customerService.update( updateCustomer );
-        return "update";
-    }
-    **********/
 }

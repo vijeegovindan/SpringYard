@@ -1,6 +1,12 @@
 package com.example.customer.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="customer")
 public class Customer {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;
@@ -10,6 +16,15 @@ public class Customer {
     public Customer() {
     }
 
+    public Customer(String firstname, String lastname, String phone, String email) {
+        this.firstName = firstname;
+        this.lastName = lastname;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -18,6 +33,7 @@ public class Customer {
         this.id = id;
     }
 
+    @Column(name = "firstname")
     public String getFirstName() {
         return firstName;
     }
@@ -26,6 +42,7 @@ public class Customer {
         this.firstName = firstName;
     }
 
+    @Column(name = "lastname")
     public String getLastName() {
         return lastName;
     }
@@ -34,6 +51,7 @@ public class Customer {
         this.lastName = lastName;
     }
 
+    @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
@@ -42,6 +60,7 @@ public class Customer {
         this.phone = phone;
     }
 
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -59,17 +78,12 @@ public class Customer {
 
         Customer customer = (Customer) o;
 
-        if (firstName != null ? !firstName.equals(customer.firstName) : customer.firstName != null)
-            return false;
-        return lastName != null ? lastName.equals(customer.lastName) : customer.lastName == null;
-
+        return id == customer.id;
     }
 
     @Override
     public int hashCode() {
-        int result = firstName != null ? firstName.hashCode() : 0;
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        return result;
+        return id;
     }
 
     @Override
